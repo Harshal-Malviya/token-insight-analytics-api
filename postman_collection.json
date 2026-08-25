@@ -1,0 +1,222 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+    "name": "Token Insight & Analytics API",
+    "description": "Postman Collection for Token Insight (CoinGecko + AI) and HyperLiquid Wallet Daily PnL API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Token Insight",
+      "item": [
+        {
+          "name": "Get Token Insight (Chainlink)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vs_currency\": \"usd\",\n  \"history_days\": 30\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/token/chainlink/insight",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "token", "chainlink", "insight"]
+            },
+            "description": "Fetches market data from CoinGecko for Chainlink and generates structured AI analysis."
+          },
+          "response": [
+            {
+              "name": "200 OK Example",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"vs_currency\": \"usd\",\n  \"history_days\": 30\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/token/chainlink/insight",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "token", "chainlink", "insight"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"source\": \"coingecko\",\n  \"token\": {\n    \"id\": \"chainlink\",\n    \"symbol\": \"link\",\n    \"name\": \"Chainlink\",\n    \"market_data\": {\n      \"current_price_usd\": 7.23,\n      \"market_cap_usd\": 3500000000,\n      \"total_volume_usd\": 120000000,\n      \"price_change_percentage_24h\": -1.2\n    }\n  },\n  \"insight\": {\n    \"reasoning\": \"Chainlink is maintaining consolidation around $7.23 level with steady volume.\",\n    \"sentiment\": \"Neutral\"\n  },\n  \"model\": {\n    \"provider\": \"openai\",\n    \"model\": \"gpt-4o-mini\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Token Insight (Ethereum)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/token/ethereum/insight",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "token", "ethereum", "insight"]
+            }
+          }
+        },
+        {
+          "name": "Invalid Token 404 Error Example",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/token/non_existent_coin_999/insight",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "token", "non_existent_coin_999", "insight"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "HyperLiquid Analytics",
+      "item": [
+        {
+          "name": "Get Wallet Daily PnL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/hyperliquid/0x0000000000000000000000000000000000000000/pnl?start=2025-08-01&end=2025-08-03",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "hyperliquid", "0x0000000000000000000000000000000000000000", "pnl"],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2025-08-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-08-03"
+                }
+              ]
+            },
+            "description": "Calculates daily realized PnL, unrealized PnL, fees, funding, net PnL, and equity."
+          },
+          "response": [
+            {
+              "name": "200 OK Example",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hyperliquid/0x0000000000000000000000000000000000000000/pnl?start=2025-08-01&end=2025-08-03",
+                  "protocol": "http",
+                  "host": ["localhost"],
+                  "port": "3000",
+                  "path": ["api", "hyperliquid", "0x0000000000000000000000000000000000000000", "pnl"],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "2025-08-01"
+                    },
+                    {
+                      "key": "end",
+                      "value": "2025-08-03"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"wallet\": \"0x0000000000000000000000000000000000000000\",\n  \"start\": \"2025-08-01\",\n  \"end\": \"2025-08-03\",\n  \"daily\": [\n    {\n      \"date\": \"2025-08-01\",\n      \"realized_pnl_usd\": 120.5,\n      \"unrealized_pnl_usd\": -15.3,\n      \"fees_usd\": 2.1,\n      \"funding_usd\": -0.5,\n      \"net_pnl_usd\": 102.6,\n      \"equity_usd\": 10102.6\n    },\n    {\n      \"date\": \"2025-08-02\",\n      \"realized_pnl_usd\": 0,\n      \"unrealized_pnl_usd\": 0,\n      \"fees_usd\": 0,\n      \"funding_usd\": 0,\n      \"net_pnl_usd\": 0,\n      \"equity_usd\": 10102.6\n    },\n    {\n      \"date\": \"2025-08-03\",\n      \"realized_pnl_usd\": 0,\n      \"unrealized_pnl_usd\": 0,\n      \"fees_usd\": 0,\n      \"funding_usd\": 0,\n      \"net_pnl_usd\": 0,\n      \"equity_usd\": 10102.6\n    }\n  ],\n  \"summary\": {\n    \"total_realized_usd\": 120.5,\n    \"total_unrealized_usd\": 0,\n    \"total_fees_usd\": 2.1,\n    \"total_funding_usd\": -0.5,\n    \"net_pnl_usd\": 102.6\n  },\n  \"diagnostics\": {\n    \"data_source\": \"hyperliquid_api\",\n    \"last_api_call\": \"2025-09-22T12:00:00Z\",\n    \"notes\": \"PnL calculated using daily close prices\"\n  }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Invalid Wallet Format Error Example",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/hyperliquid/invalid_wallet/pnl?start=2025-08-01&end=2025-08-03",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "hyperliquid", "invalid_wallet", "pnl"],
+              "query": [
+                {
+                  "key": "start",
+                  "value": "2025-08-01"
+                },
+                {
+                  "key": "end",
+                  "value": "2025-08-03"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["health"]
+        }
+      }
+    }
+  ]
+}
