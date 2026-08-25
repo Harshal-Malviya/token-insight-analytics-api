@@ -293,13 +293,3 @@ curl "http://localhost:3000/api/hyperliquid/0x0000000000000000000000000000000000
 Import `postman_collection.json` into Postman to quickly test all endpoints with pre-configured request payloads and saved response examples.
 
 ---
-
-## Deliverables Checklist
-
-- [x] Express server in TypeScript with both required endpoints
-- [x] `.env.example` provided (no secret keys hardcoded)
-- [x] Multi-stage `Dockerfile` and `docker-compose.yml`
-- [x] Pluggable AI provider configuration documentation
-- [x] Postman collection (`postman_collection.json`)
-- [x] Jest Unit tests for PnL business logic and AI fallback
-- [x] Graceful error handling for CoinGecko 404, rate limits (429), and invalid wallet input
